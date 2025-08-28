@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+        body {
+            background: #f4f6fb;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 32px 24px;
+            text-align: center;
+        }
+        h1 {
+            color: #2d3a4a;
+            margin-bottom: 24px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #3a4a5a;
+            font-weight: 500;
+        }
+        input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cfd8dc;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        button {
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        #qrSection {
+            margin-top: 20px;
+        }
+        #qrImage {
+            margin-top: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        p {
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Profile</h1>
+            <!-- QR Code Generator -->
+            <form id="qrForm" onsubmit="generateQRCode(); return false;">
+                <label for="linkInput">Enter a link to share:</label>
+                <input type="url" id="linkInput" placeholder="https://your-link.com" required />
+                <button type="submit">Generate QR Code</button>
+            </form>
+            <div id="qrSection" style="margin-top:20px;">
+                <p>Scan the QR code below:</p>
+                <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?data=https://example.com&size=150x150" alt="QR Code" />
+            </div>
+            <script>
+            function generateQRCode() {
+                var link = document.getElementById('linkInput').value;
+                var qrImg = document.getElementById('qrImage');
+                qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(link) + '&size=150x150';
+            }
+            </script>
+    </div>
+</body>
+</html>
